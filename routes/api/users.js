@@ -4,6 +4,8 @@ const User = require("../../models/User");
 const bcrypt = require('bcryptjs');
 const keys = require('../../config/keys');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
+
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
@@ -89,6 +91,14 @@ router.post('/login', (req, res)=>{
             }
         })
     })
+})
+
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.json({
+        id: req.user.id,
+        handle: req.user.handle,
+        email: req.user.email
+    });
 })
 
 module.exports = router;
