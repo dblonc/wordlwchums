@@ -19,11 +19,11 @@ router.post("/",
         }
 
         const newGuess = new Guess({
-            // user = req.user.id,
+            user:  req.user.id,
             text: req.body.text
         })
-
-        newGuess.save(guess => res.json(guess))
+        console.log(newGuess)
+        newGuess.save().then(guess => res.json(guess))
     }
 )
 

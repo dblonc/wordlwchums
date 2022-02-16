@@ -20,7 +20,7 @@
   "homepage": "https://github.com/dblonc/wordlwchums#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.1",
+    "body-parser": "^1.19.2",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.1",
