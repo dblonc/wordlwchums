@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
-const game = require("./routes/api/game")
+const daily = require("./routes/api/daily")
 const bodyParser = require('body-parser');
 const User = require('./models/User');
 const passport = require('passport');
@@ -26,5 +26,5 @@ app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 app.use("/api/users", users);
-app.use("/api/game", game )
+app.use("/api/daily", daily )
 

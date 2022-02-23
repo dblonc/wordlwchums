@@ -3,11 +3,13 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Guess = require('../../models/Guess');
+const Word = require('../../models/Word');
+const User = require('../../models/User');
 const validateGuessInput = require('../../validation/guess');
 
-
-
-router.get("/test", (req, res) => res.json({msg: "This is the game page"}))
+const dailyGame = (req, res) =>{
+    const word = "BLAME"
+}
 
 router.post("/",
     passport.authenticate("jwt", {session: false}),

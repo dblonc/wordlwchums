@@ -6,9 +6,13 @@ class DailyPage extends React.Component{
         return(
             <div>
                 <h1>Daily Puzzle</h1>
+                <div>
+                    <input type="text"></input> <button>Submit</button>
+                </div>
 
-                <Link to={'/main'}>Back to main</Link>
-
+                <div>
+                    <Link to={'/main'}>Back to main</Link>
+                </div>
             </div>
         )
     }
