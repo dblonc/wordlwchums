@@ -8,9 +8,13 @@ const User = require('../../models/User');
 const validateGuessInput = require('../../validation/guess');
 
 const dailyGame = (req, res) =>{
-    const word = "BLAME"
-}
+    const word = "BLAME";
+    // const guessedWord = "",
 
+
+
+}
+const dailyWord = "BLAME"
 router.post("/",
     passport.authenticate("jwt", {session: false}),
     (req, res)=>{
@@ -24,8 +28,14 @@ router.post("/",
             user:  req.user.id,
             text: req.body.text
         })
-        console.log(newGuess)
-        newGuess.save().then(guess => res.json(guess))
+        // console.log(newGuess)
+        // newGuess.save().then(guess => res.json(guess))
+        if(req.body.text === dailyWord){
+            res.json(true)
+        }else{
+            res.json(false)
+        }
+        
     }
 )
 
