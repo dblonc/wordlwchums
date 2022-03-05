@@ -3,9 +3,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 class DailyPage extends React.Component{
 
-    checkDailyWord(){
-        Axios.post("http://localhost3000/daily", {user: "", text: ""}).then((res)=>{
+    constructor(props){
+        super(props);
+        this.state = {
+            guessedWord: ""
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
 
+    // checkDailyWord(){
+    //     Axios.post("http://localhost3000/daily", {user: "", text: ""}).then((res)=>{
+
+    //     })
+    // }
+
+    handleChange(e){
+        this.setState({
+            guessedWord: e.target.value
         })
     }
 
@@ -14,7 +28,9 @@ class DailyPage extends React.Component{
             <div>
                 <h1>Daily Puzzle</h1>
                 <div>
-                    <input type="text"></input> <button>Submit</button>
+                    <form>
+                        <input onChange={this.handleChange} type="text"></input> <button type="submit" onSubmit={this.props.receiveGuess}>Submit</button>
+                    </form>
                 </div>
 
                 <div>

@@ -6,7 +6,7 @@ import MultiplayerPage from './multiplayer/multiplayer'
 import MainPage from './main/main_page';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
-import DailyPage from './singleplayer/daily/daily';
+import DailyPageContainer from './singleplayer/daily/daily_container';
 
 const App = () => (
     <div>
@@ -14,7 +14,7 @@ const App = () => (
         <Switch>
             <ProtectedRoute exact path="/main" component={MainPage} />
             <ProtectedRoute exact path="/multiplayer" component={MultiplayerPage} />
-            <ProtectedRoute exact path= "/daily" component={DailyPage}/> 
+            <ProtectedRoute exact path= "/daily" component={DailyPageContainer}/> 
             <AuthRoute exact path="/login" component={LoginFormContainer} />
             <AuthRoute exact path="/signup" component={SignupFormContainer} />
         </Switch>
