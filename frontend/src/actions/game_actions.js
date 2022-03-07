@@ -6,3 +6,9 @@ export const receiveGuess = guess =>({
     type: RECEIVE_CURRENT_GUESS,
     guess
 });
+
+export const createGuess = guess => dispatch =>(
+    APIUtil.createGuess(guess).then(guessCheck =>{
+        return dispatch(receiveGuess(guessCheck))
+    })
+)

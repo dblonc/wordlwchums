@@ -9,6 +9,7 @@ class DailyPage extends React.Component{
             guessedWord: ""
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     // checkDailyWord(){
@@ -23,13 +24,18 @@ class DailyPage extends React.Component{
         })
     }
 
+    handleSubmit(e){
+        e.preventDefault();
+        this.props.createGuess(this.state.guessedWord)
+    }
+
     render(){
         return(
             <div>
                 <h1>Daily Puzzle</h1>
                 <div>
-                    <form>
-                        <input onChange={this.handleChange} type="text"></input> <button type="submit" onSubmit={this.props.receiveGuess}>Submit</button>
+                    <form onSubmit={this.handleSubmit}>
+                        <input onChange={this.handleChange} type="text"></input> <button type="submit" >Submit</button>
                     </form>
                 </div>
 

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import DailyPage  from './daily';
-import { receiveGuess } from '../../../actions/game_actions';
+import { createGuess } from '../../../actions/game_actions';
 import { withRouter } from 'react-router';
 
 // const mSTP = (state) => ({
@@ -9,8 +9,8 @@ import { withRouter } from 'react-router';
 
 const mDTP = (dispatch) => {
     return {
-        receiveGuess: guess => dispatch(receiveGuess(guess))
+        createGuess: guess => dispatch(createGuess(guess))
     }
 };
 
-export default withRouter(connect(mDTP)(DailyPage));
+export default withRouter(connect(null,mDTP)(DailyPage));
