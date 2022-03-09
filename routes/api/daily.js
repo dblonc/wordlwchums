@@ -31,7 +31,7 @@ router.post("/",
         // console.log(newGuess)
         
         // newGuess.save().then(guess => res.json(guess))
-        if(req.body.text === dailyWord){
+        if(req.body.guess === dailyWord){
             res.json(true)
             console.log("true")
         }else{
