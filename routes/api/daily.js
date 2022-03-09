@@ -24,11 +24,11 @@ router.post("/",
             return res.status(400).json(errors)
         }
 
-        const newGuess = new Guess({
-            user:  req.user.id,
-            text: req.body.text
-        })
-        console.log(newGuess)
+        // const newGuess = new Guess({
+        //     user:  req.user.id,
+        //     text: req.body.text
+        // })
+        // console.log(newGuess)
         
         // newGuess.save().then(guess => res.json(guess))
         if(req.body.text === dailyWord){

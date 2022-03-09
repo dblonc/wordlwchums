@@ -4,13 +4,13 @@ const validText = require('./valid-text');
 module.exports = function validateGuessInput(data) {
     let errors = {};
 
-    data.text = validText(data.text) ? data.text : '';
+    data.guess = validText(data.guess) ? data.guess : '';
 
-    if (!Validator.isLength(data.text, { min: 5, max: 5 })) {
+    if (!Validator.isLength(data.guess, { min: 5, max: 5 })) {
         errors.text = 'Guess must be 5 characters';
     }
 
-    if (Validator.isEmpty(data.text)) {
+    if (Validator.isEmpty(data.guess)) {
         errors.text = 'Please enter a guess';
     }
 
