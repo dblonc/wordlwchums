@@ -67,8 +67,7 @@ class DailyPage extends React.Component{
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps.isCorrect !== this.props.isCorrect && this.state.guessNumber !== 0){
-            debugger
+        if(prevProps.isCorrect !== this.state.isCorrect && this.state.guessNumber !== 0 && prevProps.isCorrect !== ""){
             this.setState({
                 isCorrect: true,
                 isDisabled: true
