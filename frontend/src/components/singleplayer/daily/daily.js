@@ -5,6 +5,7 @@ class DailyPage extends React.Component{
 
     constructor(props){
         super(props);
+        
         this.state = {
             guessedWord: "",
             usedWords: [],
@@ -50,8 +51,8 @@ class DailyPage extends React.Component{
     }
 
     listGuesses(){
-        return this.state.usedWords.map(word=>
-            <ul key ={word.id}>
+        return this.state.usedWords.map((word, index)=>
+            <ul key ={index}>
                 <div>
                     <li>{word}</li>
                 </div>
@@ -68,8 +69,7 @@ class DailyPage extends React.Component{
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps.isCorrect !== this.props.isCorrect && this.state.guessNumber !== 0 && prevProps.isCorrect !== ""){
-            debugger
+        if(prevProps.isCorrect !== this.props.isCorrect && this.state.guessNumber !== 0){
             this.setState({
                 isCorrect: true,
                 isDisabled: true

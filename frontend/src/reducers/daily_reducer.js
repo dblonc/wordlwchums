@@ -1,7 +1,7 @@
 import { RECEIVE_CURRENT_GUESS } from "../actions/game_actions";
 
 const initialState ={
-    guessedWord: ""
+    isCorrect: false
 }
 
 export default function (state = initialState, action){
@@ -10,7 +10,7 @@ export default function (state = initialState, action){
             
             return{
                 ...state,
-                guessedWord: action.guess
+                isCorrect: action.guess
             };
             default:
                 return state;

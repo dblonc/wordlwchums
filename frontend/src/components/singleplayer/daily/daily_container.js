@@ -4,7 +4,7 @@ import { createGuess } from '../../../actions/game_actions';
 import { withRouter } from 'react-router';
 
 const mSTP = (state) => ({
-    isCorrect: state.daily.guessedWord
+    isCorrect: state.daily.isCorrect
 });
 
 const mDTP = (dispatch) => {
