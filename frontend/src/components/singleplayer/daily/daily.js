@@ -9,11 +9,14 @@ class DailyPage extends React.Component{
             guessedWord: "",
             usedWords: [],
             isCorrect: false,
-            guessNumber: 0
+            guessNumber: 0,
+            isDisabled: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleGuesses = this.handleGuesses.bind(this)
+        this.listGuesses = this.listGuesses.bind(this)
+        this.winState = this.winState.bind(this)
     }
 
     handleChange(e){
@@ -32,10 +35,11 @@ class DailyPage extends React.Component{
     }
 
     handleGuesses(){
-        if(this.state.guessNumber < 7){
+        
+        if(this.state.guessNumber < 6){
             return(
             <form onSubmit={this.handleSubmit}>
-                <input onChange={this.handleChange} type="text"></input> <button type="submit" >Submit</button>
+                    <input disabled={(this.state.isDisabled) ? "disabled" : ""} onChange={this.handleChange} type="text" ></input> <button disabled={(this.state.isDisabled) ? "disabled" : ""} type="submit" >Submit</button>
             </form>)
         }else{
             return(
@@ -44,17 +48,44 @@ class DailyPage extends React.Component{
         }
     }
 
+    listGuesses(){
+        return this.state.usedWords.map(word=>
+            <ul key ={word.id}>
+                <div>
+                    <li>{word}</li>
+                </div>
+            </ul>)
+    }
 
+    winState(){
+        if(this.state.isCorrect === true){
+         
+            return(
+                <h1>YOU WIN</h1>
+            )
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.isCorrect !== this.props.isCorrect && this.state.guessNumber !== 0){
+            debugger
+            this.setState({
+                isCorrect: true,
+                isDisabled: true
+            })
+         
+        }
+       
+    }
 
     render(){
         return(
             <div>
                 <h1>Daily Puzzle</h1>
                 <div>
+                    {this.listGuesses()}
                     {this.handleGuesses()}
-                    {/* <form onSubmit={this.handleSubmit}>
-                        <input onChange={this.handleChange} type="text"></input> <button type="submit" >Submit</button>
-                    </form> */}
+                    {this.winState()}
                 </div>
 
                 <div>

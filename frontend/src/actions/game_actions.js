@@ -8,7 +8,7 @@ export const receiveGuess = guess =>({
 });
 
 export const createGuess = guess => dispatch =>(
-    APIUtil.createGuess(guess).then(guessCheck =>{
-        return dispatch(receiveGuess(guessCheck))
+    APIUtil.createGuess(guess).then(res =>{
+        return dispatch(receiveGuess(res.data))
     })
 )

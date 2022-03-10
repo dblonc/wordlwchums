@@ -3,9 +3,9 @@ import DailyPage  from './daily';
 import { createGuess } from '../../../actions/game_actions';
 import { withRouter } from 'react-router';
 
-// const mSTP = (state) => ({
-//     isCorrect: state.entities.guessedWord
-// });
+const mSTP = (state) => ({
+    isCorrect: state.daily.guessedWord
+});
 
 const mDTP = (dispatch) => {
     return {
@@ -13,4 +13,4 @@ const mDTP = (dispatch) => {
     }
 };
 
-export default withRouter(connect(null,mDTP)(DailyPage));
+export default withRouter(connect(mSTP,mDTP)(DailyPage));
