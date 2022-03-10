@@ -30,7 +30,8 @@ class DailyPage extends React.Component{
         this.props.createGuess(this.state.guessedWord)
         this.state.usedWords.push(this.state.guessedWord)
         this.setState({
-            guessNumber: this.state.guessNumber + 1
+            guessNumber: this.state.guessNumber + 1,
+            guessedWord: ""
         })
     }
 
@@ -39,7 +40,7 @@ class DailyPage extends React.Component{
         if(this.state.guessNumber < 6){
             return(
             <form onSubmit={this.handleSubmit}>
-                    <input disabled={(this.state.isDisabled) ? "disabled" : ""} onChange={this.handleChange} type="text" ></input> <button disabled={(this.state.isDisabled) ? "disabled" : ""} type="submit" >Submit</button>
+                    <input value={this.state.guessedWord} disabled={(this.state.isDisabled) ? "disabled" : ""} onChange={this.handleChange} type="text" ></input> <button disabled={(this.state.isDisabled) ? "disabled" : ""} type="submit" >Submit</button>
             </form>)
         }else{
             return(
@@ -67,7 +68,8 @@ class DailyPage extends React.Component{
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps.isCorrect !== this.state.isCorrect && this.state.guessNumber !== 0 && prevProps.isCorrect !== ""){
+        if(prevProps.isCorrect !== this.props.isCorrect && this.state.guessNumber !== 0 && prevProps.isCorrect !== ""){
+            debugger
             this.setState({
                 isCorrect: true,
                 isDisabled: true
