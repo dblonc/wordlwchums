@@ -11,13 +11,16 @@ class DailyPage extends React.Component{
             usedWords: [],
             isCorrect: false,
             guessNumber: 0,
-            isDisabled: false
+            isDisabled: false,
+            splitWord: [],
+            flag: true
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleGuesses = this.handleGuesses.bind(this)
         this.listGuesses = this.listGuesses.bind(this)
         this.winState = this.winState.bind(this)
+        this.letterBackground = this.letterBackground.bind(this)
     }
 
     handleChange(e){
@@ -27,12 +30,17 @@ class DailyPage extends React.Component{
     }
 
     handleSubmit(e){
+        debugger
         e.preventDefault();
+        
         this.props.createGuess(this.state.guessedWord)
         this.state.usedWords.push(this.state.guessedWord)
+        let split = this.state.guessedWord.toUpperCase().split()
         this.setState({
             guessNumber: this.state.guessNumber + 1,
+            splitWord: this.state.guessedWord.toUpperCase().split(""),
             guessedWord: ""
+            
         })
     }
 
@@ -50,12 +58,32 @@ class DailyPage extends React.Component{
         }
     }
 
+
+    letterBackground(word){
+       let split = word.split("")
+       console.log(split)
+    //    return split.map((letter, index) => {
+          
+    //            <p className = "let1">{letter}</p>
+
+          
+    //    });
+
+        return(
+            <div>{word.toUpperCase()}</div>
+        )
+                
+            
+
+    }
+
     listGuesses(){
+        
         return this.state.usedWords.map((word, index)=>
             <ul key ={index}>
-                <div>
-                    <li>{word}</li>
-                </div>
+               
+                <li className="guesslist">{this.letterBackground(word)}</li>
+              
             </ul>)
     }
 
@@ -69,13 +97,27 @@ class DailyPage extends React.Component{
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps.isCorrect !== this.props.isCorrect && this.state.guessNumber !== 0){
-            this.setState({
-                isCorrect: true,
-                isDisabled: true
-            })
+        // let flag = true
+        // if(prevProps.isCorrect !== this.props.isCorrect && this.state.guessNumber !== 0){
+        //     this.setState({
+        //         isCorrect: true,
+        //         isDisabled: true
+        //     })
          
-        }
+        // }
+        if(this.state.flag === true){
+            if(prevProps.isCorrect.includes("black")||prevProps.isCorrect.includes("yellow")){
+                return 
+            }else{
+                this.setState({
+                    isCorrect: true,
+                    isDisabled: true,
+                    flag: false
+                })
+            }
+        }else{
+            return
+        }   
        
     }
 

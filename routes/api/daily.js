@@ -15,6 +15,7 @@ const dailyGame = (req, res) =>{
 
 }
 const dailyWord = "BLAME"
+const dailyWordSplit = ['B','L','A','M','E']
 router.post("/",
     passport.authenticate("jwt", {session: false}),
     (req, res)=>{
@@ -23,20 +24,29 @@ router.post("/",
         if(!isValid){
             return res.status(400).json(errors)
         }
-
-        // const newGuess = new Guess({
-        //     user:  req.user.id,
-        //     text: req.body.text
-        // })
-        // console.log(newGuess)
-        
-        // newGuess.save().then(guess => res.json(guess))
-        if(req.body.guess === dailyWord){
-            res.json(true)
-            console.log("true")
-        }else{
-            res.json(false)
+        let split = req.body.guess.toUpperCase().split("")
+        let guessedLetters = ["black","black","black","black","black"]
+        for (let i = 0; i < split.length; i++) {
+            let ele = split[i];
+            if(dailyWordSplit.includes(ele)){
+                if(ele === dailyWordSplit[i]){
+                    guessedLetters[i] = "green"
+                }else{
+                    guessedLetters[i] = "yellow"
+                }
+            }else{
+                guessedLetters[i]="black"
+            }
+            
         }
+        res.json(guessedLetters)
+        // if(req.body.guess.split("") === dailyWordSplit){
+        //     res.json(true)
+        //     console.log("true")
+        // }else{
+        //     res.json(false)
+        // }
+        // return true
         
     }
 )
