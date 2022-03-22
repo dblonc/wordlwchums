@@ -61,7 +61,6 @@ class DailyPage extends React.Component{
 
     letterBackground(word){
        let split = word.split("")
-       console.log(split)
     //    return split.map((letter, index) => {
           
     //            <p className = "let1">{letter}</p>
@@ -70,7 +69,14 @@ class DailyPage extends React.Component{
     //    });
 
         return(
-            <div>{word.toUpperCase()}</div>
+            <div>
+                <span style={{ backgroundColor: this.props.isCorrect[0] }} >{split[0]}</span>
+                <span style={{ backgroundColor: this.props.isCorrect[1] }}>{split[1]}</span>
+                <span style={{ backgroundColor: this.props.isCorrect[2] }}>{split[2]}</span>
+                <span style={{ backgroundColor: this.props.isCorrect[3] }}>{split[3]}</span>
+                <span style={{ backgroundColor: this.props.isCorrect[4] }}>{split[4]}</span>
+                <span style={{ backgroundColor: this.props.isCorrect[5] }}>{split[5]}</span>
+            </div>
         )
                 
             

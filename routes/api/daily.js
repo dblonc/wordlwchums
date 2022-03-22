@@ -35,7 +35,7 @@ router.post("/",
                     guessedLetters[i] = "yellow"
                 }
             }else{
-                guessedLetters[i]="black"
+                guessedLetters[i]="grey"
             }
             
         }
