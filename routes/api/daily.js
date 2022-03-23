@@ -25,7 +25,7 @@ router.post("/",
             return res.status(400).json(errors)
         }
         let split = req.body.guess.toUpperCase().split("")
-        let guessedLetters = ["black","black","black","black","black"]
+        let guessedLetters = ["grey","grey","grey","grey","grey"]
         for (let i = 0; i < split.length; i++) {
             let ele = split[i];
             if(dailyWordSplit.includes(ele)){
