@@ -14,11 +14,11 @@ const dailyGame = (req, res) =>{
 
 
 }
-const dailyWord = "BLAME"
-const dailyWordSplit = ['B','L','A','M','E']
+const wordBank = ["BLAME", "LOVES", "SOLVE", "CAULK", "PLACE"]
+const dailyWordSplit = wordBank[Math.floor(Math.random()* wordBank.length)]
 router.post("/",
-    passport.authenticate("jwt", {session: false}),
-    (req, res)=>{
+passport.authenticate("jwt", {session: false}),
+(req, res)=>{
         const{isValid, errors } = validateGuessInput(req.body)
     
         if(!isValid){
@@ -30,9 +30,9 @@ router.post("/",
             let ele = split[i];
             if(dailyWordSplit.includes(ele)){
                 if(ele === dailyWordSplit[i]){
-                    guessedLetters[i] = "green"
+                    guessedLetters[i] = "#538d4e"
                 }else{
-                    guessedLetters[i] = "yellow"
+                    guessedLetters[i] = "#b59f3b"
                 }
             }else{
                 guessedLetters[i]="grey"

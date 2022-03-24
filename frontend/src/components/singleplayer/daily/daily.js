@@ -15,7 +15,8 @@ class DailyPage extends React.Component{
             isDisabled: false,
             splitWord: [],
             flag: true,
-            savedColors: []
+            savedColors: [],
+            alreadyWon: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -34,7 +35,7 @@ class DailyPage extends React.Component{
     handleSubmit(e){
         
         e.preventDefault();
-        debugger
+        
         this.props.createGuess(this.state.guessedWord).then( ()=>{
             const newUsedWords = [...this.state.usedWords]
             const newSavedColors = [...this.state.savedColors]
@@ -70,47 +71,6 @@ class DailyPage extends React.Component{
         }
     }
 
-
-    // letterBackground(word){
-    //    let split = word.split("")
-    // //    return split.map((letter, index) => {
-          
-    // //            <p className = "let1">{letter}</p>
-
-          
-    // //    });
-
-    //     return(
-    //         // <div>
-    //         //     <span style={{ backgroundColor: this.props.isCorrect[0] }} >{split[0]}</span>
-    //         //     <span style={{ backgroundColor: this.props.isCorrect[1] }}>{split[1]}</span>
-    //         //     <span style={{ backgroundColor: this.props.isCorrect[2] }}>{split[2]}</span>
-    //         //     <span style={{ backgroundColor: this.props.isCorrect[3] }}>{split[3]}</span>
-    //         //     <span style={{ backgroundColor: this.props.isCorrect[4] }}>{split[4]}</span>
-    //         //     <span style={{ backgroundColor: this.props.isCorrect[5] }}>{split[5]}</span>
-    //         // </div>
-    //         split.map(letter =>(
-    //         <div>
-    //             <span>{letter}</span>
-               
-    //         </div>
-    //         ))
-    //     )
-                
-            
-
-    // }
-
-    // listGuesses(){
-
-    //     return this.state.usedWords.map((word, index)=>
-    //         <ul key ={index}>
-
-    //             <li className="guesslist">{this.letterBackground(word)}</li>
-
-    //         </ul>)
-    // }
-
     letterBackground(word, index){
         const letters = word.split("").map((letter, letindex) => {
             return <span className = "tile" key={letindex} style={{ backgroundColor: this.state.savedColors[index][letindex]}}>{letter}</span>
@@ -135,7 +95,7 @@ class DailyPage extends React.Component{
     }
 
     winState(){
-        if(this.state.isCorrect === true){
+        if(this.state.isCorrect === true || this.state.alreadyWon === true){
          
             return(
                 <h1>YOU WIN</h1>
@@ -152,14 +112,15 @@ class DailyPage extends React.Component{
         //     })
          
         // }
-        if(this.state.flag === true){
-            if(this.props.isCorrect.includes("grey")||this.props.isCorrect.includes("yellow")){
+        if(this.state.flag === true && this.state.alreadyWon === false){
+            if (this.props.isCorrect.includes("grey") || this.props.isCorrect.includes("b59f3b")){
                 return 
             }else{
                 this.setState({
                     isCorrect: true,
                     isDisabled: true,
-                    flag: false
+                    flag: false,
+                    alreadyWon: true
                 })
             }
         }else{
@@ -171,22 +132,22 @@ class DailyPage extends React.Component{
     render(){
         return(
             <div>
-                <h1>Daily Puzzle</h1>
                 <div className="game">
                     <div className="board-container">
                         <div className = "board">
                             
                             {this.listGuesses()}
-                                
-                        </div>
                         <div className="word-input">
                             {this.handleGuesses()}
                             {this.winState()}
                         </div>
+                                
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <Link to={'/main'}>Back to main</Link>
+
+                    <div>
+                        <Link to={'/main'}>Back to main</Link>
+                    </div>
                 </div>
             </div>
         )
