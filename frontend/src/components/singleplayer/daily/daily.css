@@ -11,9 +11,9 @@
     width: 350px;
     height: 420px;
     display: grid;
-    grid-template-rows: repeat(6, 1fr);
-    grid-gap: 5px;
-    padding: 10px;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 5px;
+    /* padding: 10px; */
     box-sizing: border-box;
 }
 
@@ -24,9 +24,9 @@
 }
 
 .tile{
-    border: 2px solid black;
-    width: 58px;
-    height: 58px;
+    border: 2px solid rgb(43, 43, 43);
+    width: 62px;
+    height: 62px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -40,10 +40,6 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.list-words{
-    list-style-type: none;
-}
-
 .game{
     width: 100%;
     max-width: var(500px);
@@ -53,4 +49,24 @@
     flex-direction: column;
     background-color: #121213;
     overflow: hidden;
+}
+
+.cur-guess{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    width: 300px;
+}
+
+.guess-tile{
+    border: 2px solid rgb(43, 43, 43);
+    width: 58px;
+    height: 58px;
+}
+
+.row{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    width: 300px;
 }

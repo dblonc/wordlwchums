@@ -9,6 +9,7 @@ class DailyPage extends React.Component{
         
         this.state = {
             guessedWord: "",
+            currentGuess: [],
             usedWords: [],
             isCorrect: false,
             guessNumber: 0,
@@ -25,6 +26,8 @@ class DailyPage extends React.Component{
         this.winState = this.winState.bind(this)
         this.letterBackground = this.letterBackground.bind(this)
     }
+
+// Different Handlers for different events
 
     handleChange(e){
         this.setState({
@@ -47,7 +50,8 @@ class DailyPage extends React.Component{
                 splitWord: this.state.guessedWord.toUpperCase().split(""),
                 guessedWord: "",
                 usedWords: newUsedWords,
-                savedColors: newSavedColors
+                savedColors: newSavedColors,
+                currentGuess: []
                 
             })
 
@@ -71,26 +75,28 @@ class DailyPage extends React.Component{
         }
     }
 
+
+//Functions that handle display and effects
     letterBackground(word, index){
         const letters = word.split("").map((letter, letindex) => {
-            return <span className = "tile" key={letindex} style={{ backgroundColor: this.state.savedColors[index][letindex]}}>{letter}</span>
+            return <div className = "tile" key={letindex} style={{ backgroundColor: this.state.savedColors[index][letindex]}}>{letter}</div>
         })
         
         return(
-            <li key={index}>
+            <div className = "row" key={index}>
                 {letters}
-            </li>
+            </div>
         )
     }
 
 
     listGuesses(){
         return(
-            <ul className = "list-words">
+            <div className = "list-words">
                 {this.state.usedWords.map((word,index)=>{
                     return this.letterBackground(word, index)
                 })}
-            </ul>
+            </div>
         )
     }
 
@@ -103,16 +109,19 @@ class DailyPage extends React.Component{
         }
     }
 
+    handleCurrentGuess(){
+        // const newGuesses = [...this.state.currentGuess]
+        // newGuesses.push(this.state.currentGuess[-1])
+        // this.setState({
+        //     currentGuess: newGuesses
+        // })
+    }
+
+
+
     componentDidUpdate(prevProps){
-        // let flag = true
-        // if(prevProps.isCorrect !== this.props.isCorrect && this.state.guessNumber !== 0){
-        //     this.setState({
-        //         isCorrect: true,
-        //         isDisabled: true
-        //     })
-         
-        // }
-        if(this.state.flag === true && this.state.alreadyWon === false){
+        
+        if(this.state.flag === true){
             if (this.props.isCorrect.includes("grey") || this.props.isCorrect.includes("b59f3b")){
                 return 
             }else{
@@ -135,8 +144,14 @@ class DailyPage extends React.Component{
                 <div className="game">
                     <div className="board-container">
                         <div className = "board">
-                            
-                            {this.listGuesses()}
+                        {this.listGuesses()}
+                        <div className= "cur-guess">
+                            <div className = "guess-tile">  </div>
+                            <div className = "guess-tile">  </div>
+                            <div className = "guess-tile">  </div>
+                            <div className = "guess-tile">  </div>
+                            <div className = "guess-tile">  </div>
+                        </div>
                         <div className="word-input">
                             {this.handleGuesses()}
                             {this.winState()}
