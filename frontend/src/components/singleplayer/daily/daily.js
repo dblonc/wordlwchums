@@ -1,6 +1,7 @@
 import { Axios } from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './daily.css'
 class DailyPage extends React.Component{
 
     constructor(props){
@@ -112,7 +113,7 @@ class DailyPage extends React.Component{
 
     letterBackground(word, index){
         const letters = word.split("").map((letter, letindex) => {
-            return <span key={letindex} style={{ backgroundColor: this.state.savedColors[index][letindex]}}>{letter}</span>
+            return <span className = "tile" key={letindex} style={{ backgroundColor: this.state.savedColors[index][letindex]}}>{letter}</span>
         })
         
         return(
@@ -125,7 +126,7 @@ class DailyPage extends React.Component{
 
     listGuesses(){
         return(
-            <ul>
+            <ul className = "list-words">
                 {this.state.usedWords.map((word,index)=>{
                     return this.letterBackground(word, index)
                 })}
@@ -171,12 +172,19 @@ class DailyPage extends React.Component{
         return(
             <div>
                 <h1>Daily Puzzle</h1>
-                <div>
-                    {this.listGuesses()}
-                    {this.handleGuesses()}
-                    {this.winState()}
+                <div className="game">
+                    <div className="board-container">
+                        <div className = "board">
+                            
+                            {this.listGuesses()}
+                                
+                        </div>
+                        <div className="word-input">
+                            {this.handleGuesses()}
+                            {this.winState()}
+                        </div>
+                    </div>
                 </div>
-
                 <div>
                     <Link to={'/main'}>Back to main</Link>
                 </div>
