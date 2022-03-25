@@ -25,6 +25,7 @@ class DailyPage extends React.Component{
         this.listGuesses = this.listGuesses.bind(this)
         this.winState = this.winState.bind(this)
         this.letterBackground = this.letterBackground.bind(this)
+        this.handleCurrentGuess = this.handleCurrentGuess.bind(this)
     }
 
 // Different Handlers for different events
@@ -70,7 +71,7 @@ class DailyPage extends React.Component{
             </form>)
         }else{
             return(
-                <h1>YOU LOSE!</h1>
+                <h1>YOU LOSE!!</h1>
             )
         }
     }
@@ -104,25 +105,27 @@ class DailyPage extends React.Component{
         if(this.state.isCorrect === true || this.state.alreadyWon === true){
          
             return(
-                <h1>YOU WIN</h1>
+                <h1>YOU WIN!</h1>
             )
         }
     }
 
     handleCurrentGuess(){
-        // const newGuesses = [...this.state.currentGuess]
-        // newGuesses.push(this.state.currentGuess[-1])
-        // this.setState({
-        //     currentGuess: newGuesses
-        // })
+        const filterPress = new RegExp("/[a-z/]");
+        let newCurrentGuess = []
+        document.addEventListener('keydown', (e)=>{
+            console.log(e.key)
+        })
     }
+
+    
 
 
 
     componentDidUpdate(prevProps){
         
         if(this.state.flag === true){
-            if (this.props.isCorrect.includes("grey") || this.props.isCorrect.includes("b59f3b")){
+            if (this.props.isCorrect.includes("grey") || this.props.isCorrect.includes("#b59f3b")){
                 return 
             }else{
                 this.setState({
@@ -142,6 +145,7 @@ class DailyPage extends React.Component{
         return(
             <div>
                 <div className="game">
+                    {this.handleCurrentGuess()}
                     <div className="board-container">
                         <div className = "board">
                         {this.listGuesses()}
