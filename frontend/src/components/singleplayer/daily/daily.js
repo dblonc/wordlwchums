@@ -105,16 +105,21 @@ class DailyPage extends React.Component{
         if(this.state.isCorrect === true || this.state.alreadyWon === true){
          
             return(
-                <h1>YOU WIN!</h1>
+                <h1 className="win-msg">YOU WIN!</h1>
             )
         }
     }
 
     handleCurrentGuess(){
-        const filterPress = new RegExp("/[a-z/]");
+        const filterPress = new RegExp('[a-z]');
+        const currGuess = document.querySelector('#guess-word') 
         let newCurrentGuess = []
         document.addEventListener('keydown', (e)=>{
-            console.log(e.key)
+            let pressedKey = e.key;
+            if (pressedKey.length === 1 && filterPress.test(e.key) ){
+                currGuess.dataset.letters = e.key
+                console.log(currGuess)
+            }
         })
     }
 
@@ -149,7 +154,7 @@ class DailyPage extends React.Component{
                     <div className="board-container">
                         <div className = "board">
                         {this.listGuesses()}
-                        <div className= "cur-guess">
+                        <div className= "cur-guess" id= "guess-word" data-letters = "">
                             <div className = "guess-tile">  </div>
                             <div className = "guess-tile">  </div>
                             <div className = "guess-tile">  </div>
