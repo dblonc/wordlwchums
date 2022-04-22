@@ -1,7 +1,8 @@
-import { Axios } from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './daily.css'
+import Board from '../board/board'
+
 class DailyPage extends React.Component{
 
     constructor(props){
@@ -23,17 +24,20 @@ class DailyPage extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleGuesses = this.handleGuesses.bind(this)
         this.listGuesses = this.listGuesses.bind(this)
-        this.winState = this.winState.bind(this)
+        this.winState = this.winState.bind(this) 
         this.letterBackground = this.letterBackground.bind(this)
-        this.handleCurrentGuess = this.handleCurrentGuess.bind(this)
     }
 
 // Different Handlers for different events
 
     handleChange(e){
-        this.setState({
-            guessedWord: e.target.value
-        })
+        const alphabet = "abcdefghijklmnopqrstuvwxyz"
+        const lastVar = e.target.value[e.target.value.length - 1]
+        if (e.target.value.length === 0 || alphabet.includes(lastVar.toLowerCase()) ){
+            this.setState({
+                guessedWord: e.target.value
+            })
+        }
     }
 
     handleSubmit(e){
@@ -45,7 +49,6 @@ class DailyPage extends React.Component{
             const newSavedColors = [...this.state.savedColors]
             newUsedWords.push(this.state.guessedWord)
             newSavedColors.push(this.props.isCorrect)
-            let split = this.state.guessedWord.toUpperCase().split()
             this.setState({
                 guessNumber: this.state.guessNumber + 1,
                 splitWord: this.state.guessedWord.toUpperCase().split(""),
@@ -110,18 +113,7 @@ class DailyPage extends React.Component{
         }
     }
 
-    handleCurrentGuess(){
-        const filterPress = new RegExp('[a-z]');
-        const currGuess = document.querySelector('#guess-word') 
-        let newCurrentGuess = []
-        document.addEventListener('keydown', (e)=>{
-            let pressedKey = e.key;
-            if (pressedKey.length === 1 && filterPress.test(e.key) ){
-                currGuess.dataset.letters = e.key
-                console.log(currGuess)
-            }
-        })
-    }
+
 
     
 
@@ -146,26 +138,26 @@ class DailyPage extends React.Component{
        
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <div className="game">
-                    {this.handleCurrentGuess()}
                     <div className="board-container">
-                        <div className = "board">
-                        {this.listGuesses()}
-                        <div className= "cur-guess" id= "guess-word" data-letters = "">
-                            <div className = "guess-tile">  </div>
-                            <div className = "guess-tile">  </div>
-                            <div className = "guess-tile">  </div>
-                            <div className = "guess-tile">  </div>
-                            <div className = "guess-tile">  </div>
-                        </div>
-                        <div className="word-input">
-                            {this.handleGuesses()}
-                            {this.winState()}
-                        </div>
-                                
+                        <div className="boardD">
+                            {this.listGuesses()}
+                            {/* <div className="cur-guess" id="guess-word" data-letters="">
+                                <div className="guess-tile">  </div>
+                                <div className="guess-tile">  </div>
+                                <div className="guess-tile">  </div>
+                                <div className="guess-tile">  </div>
+                                <div className="guess-tile">  </div>
+                            </div> */}
+                            <Board guessedWord={this.state.guessedWord}/>
+                            <div className="word-input">
+                                {this.handleGuesses()}
+                                {this.winState()}
+                            </div>
+
                         </div>
                     </div>
 
@@ -176,6 +168,7 @@ class DailyPage extends React.Component{
             </div>
         )
     }
+
 }
 
 export default DailyPage;
