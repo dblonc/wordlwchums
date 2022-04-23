@@ -114,11 +114,6 @@ class DailyPage extends React.Component{
     }
 
 
-
-    
-
-
-
     componentDidUpdate(prevProps){
         
         if(this.state.flag === true){
@@ -145,13 +140,6 @@ class DailyPage extends React.Component{
                     <div className="board-container">
                         <div className="boardD">
                             {this.listGuesses()}
-                            {/* <div className="cur-guess" id="guess-word" data-letters="">
-                                <div className="guess-tile">  </div>
-                                <div className="guess-tile">  </div>
-                                <div className="guess-tile">  </div>
-                                <div className="guess-tile">  </div>
-                                <div className="guess-tile">  </div>
-                            </div> */}
                             <Board guessedWord={this.state.guessedWord} guessNumber={this.state.guessNumber}/>
                             <div className="word-input">
                                 {this.handleGuesses()}

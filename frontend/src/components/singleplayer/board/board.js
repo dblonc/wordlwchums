@@ -7,24 +7,20 @@ class Board extends React.Component {
     }
 
     printBoard(){
-        let times = 5 - this.props.guessNumber;
-          
-        // return(
-        //     <div className="cur-guess" id="guess-word2">
-        //         <div className="guess-tile">  </div>
-        //         <div className="guess-tile">  </div>
-        //         <div className="guess-tile">  </div>
-        //         <div className="guess-tile">  </div>
-        //         <div className="guess-tile">  </div>
-        //     </div>
-        // )
-        return( [...Array(times)].map((e, i) => <div className="cur-guess" id="guess-word2">
+        let times = 6 - this.props.guessNumber;
+       
+        if(times === 0){
+            return null
+        }else{
+
+        return( [...Array(times -1)].map((e, i) => <div className="cur-guess" key={i} id="guess-word2">
             <div className="guess-tile">  </div>
             <div className="guess-tile">  </div>
             <div className="guess-tile">  </div>
             <div className="guess-tile">  </div>
             <div className="guess-tile">  </div>
         </div>))
+        }
     }
 
     render(){
@@ -38,35 +34,6 @@ class Board extends React.Component {
                     <div className="guess-tile">{this.props.guessedWord[4]}  </div>
                 </div>
                 {this.printBoard()}
-
-                {/* <div className="cur-guess" id="guess-word2">
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                </div>
-                <div className="cur-guess" id="guess-word3">
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                </div>
-                <div className="cur-guess" id="guess-word4">
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                </div>
-                <div className="cur-guess" id="guess-word5">
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                    <div className="guess-tile">  </div>
-                </div> */}
             </div>
         )
     }
