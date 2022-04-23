@@ -3,7 +3,28 @@ import './board.css'
 class Board extends React.Component {
     constructor(props){
         super(props);
-     
+     this.printBoard = this.printBoard.bind(this)
+    }
+
+    printBoard(){
+        let times = 5 - this.props.guessNumber;
+          
+        // return(
+        //     <div className="cur-guess" id="guess-word2">
+        //         <div className="guess-tile">  </div>
+        //         <div className="guess-tile">  </div>
+        //         <div className="guess-tile">  </div>
+        //         <div className="guess-tile">  </div>
+        //         <div className="guess-tile">  </div>
+        //     </div>
+        // )
+        return( [...Array(times)].map((e, i) => <div className="cur-guess" id="guess-word2">
+            <div className="guess-tile">  </div>
+            <div className="guess-tile">  </div>
+            <div className="guess-tile">  </div>
+            <div className="guess-tile">  </div>
+            <div className="guess-tile">  </div>
+        </div>))
     }
 
     render(){
@@ -16,7 +37,9 @@ class Board extends React.Component {
                     <div className="guess-tile">{this.props.guessedWord[3]}  </div>
                     <div className="guess-tile">{this.props.guessedWord[4]}  </div>
                 </div>
-                <div className="cur-guess" id="guess-word2">
+                {this.printBoard()}
+
+                {/* <div className="cur-guess" id="guess-word2">
                     <div className="guess-tile">  </div>
                     <div className="guess-tile">  </div>
                     <div className="guess-tile">  </div>
@@ -43,7 +66,7 @@ class Board extends React.Component {
                     <div className="guess-tile">  </div>
                     <div className="guess-tile">  </div>
                     <div className="guess-tile">  </div>
-                </div>
+                </div> */}
             </div>
         )
     }

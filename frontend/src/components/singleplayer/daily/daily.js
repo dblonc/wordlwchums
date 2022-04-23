@@ -152,7 +152,7 @@ class DailyPage extends React.Component{
                                 <div className="guess-tile">  </div>
                                 <div className="guess-tile">  </div>
                             </div> */}
-                            <Board guessedWord={this.state.guessedWord}/>
+                            <Board guessedWord={this.state.guessedWord} guessNumber={this.state.guessNumber}/>
                             <div className="word-input">
                                 {this.handleGuesses()}
                                 {this.winState()}
