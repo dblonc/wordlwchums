@@ -15,7 +15,7 @@ const dailyGame = (req, res) =>{
 
 }
 const wordBank = ["BLAME", "LOVES", "SOLVE", "CAULK", "PLACE"]
-const dailyWordSplit = wordBank[Math.floor(Math.random()* wordBank.length)]
+const dailyWord = wordBank[Math.floor(Math.random()* wordBank.length)]
 router.post("/",
 passport.authenticate("jwt", {session: false}),
 (req, res)=>{
@@ -24,20 +24,34 @@ passport.authenticate("jwt", {session: false}),
         if(!isValid){
             return res.status(400).json(errors)
         }
+        const dailyWordSplit = dailyWord.split("")
+
         let split = req.body.guess.toUpperCase().split("")
         let guessedLetters = ["grey","grey","grey","grey","grey"]
         for (let i = 0; i < split.length; i++) {
             let ele = split[i];
-            if(dailyWordSplit.includes(ele)){
-                if(ele === dailyWordSplit[i]){
-                    guessedLetters[i] = "#538d4e"
-                }else{
-                    guessedLetters[i] = "#b59f3b"
-                }
-            }else{
-                guessedLetters[i]="grey"
+            if(ele === dailyWordSplit[i]){
+                guessedLetters[i] = "#538d4e";
+                dailyWordSplit[i] = " ";
             }
+            // if(dailyWordSplit.includes(ele)){
+            //     if(ele === dailyWordSplit[i]){
+            //         guessedLetters[i] = "#538d4e"
+            //     }else{
+            //         guessedLetters[i] = "#b59f3b"
+            //     }
+            // }else{
+            //     guessedLetters[i]="grey"
+            // }
             
+        }
+        for (let i = 0; i < split.length; i++){
+            let ele = split[i];
+            if (guessedLetters[i] !== "#538d4e" && dailyWordSplit.includes(ele)){
+                guessedLetters[i] = "#b59f3b"
+                dailyWordSplit[i] = " ";
+
+            }
         }
         res.json(guessedLetters)
         // if(req.body.guess.split("") === dailyWordSplit){

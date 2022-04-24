@@ -8,7 +8,7 @@ class Board extends React.Component {
 
     printBoard(){
         let times = 6 - this.props.guessNumber;
-       
+        debugger
         if(times === 0){
             return null
         }else{
