@@ -74,7 +74,7 @@ class DailyPage extends React.Component{
             </form>)
         }else if(this.state.guessNumber >= 6 &&  this.state.isCorrect !== true){
             return(
-                <h1>YOU LOSE!!</h1>
+                <h1 className="msg">YOU LOSE!!</h1>
             )
         }
     }
@@ -108,7 +108,7 @@ class DailyPage extends React.Component{
         if(this.state.isCorrect === true || this.state.alreadyWon === true){
          
             return(
-                <h1 className="win-msg">YOU WIN!</h1>
+                <h1 className="msg">YOU WIN!</h1>
             )
         }
     }
@@ -140,18 +140,19 @@ class DailyPage extends React.Component{
                     <div className="board-container">
                         <div className="boardD">
                             {this.listGuesses()}
-                            <Board guessedWord={this.state.guessedWord} guessNumber={this.state.guessNumber}/>
+                            <Board guessedWord={this.state.guessedWord} 
+                                   guessNumber={this.state.guessNumber} />
                             <div className="word-input">
                                 {this.handleGuesses()}
                                 {this.winState()}
                             </div>
 
                         </div>
+                        <Link className="links" to={'/main'}>Back to main</Link>
                     </div>
 
-                    <div>
-                        <Link to={'/main'}>Back to main</Link>
-                    </div>
+                   
+                    
                 </div>
             </div>
         )

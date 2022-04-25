@@ -8,7 +8,7 @@ const User = require('../../models/User');
 const validateGuessInput = require('../../validation/guess');
 
 
-const wordBank = ["BLAME", "LOVES", "SOLVE", "CAULK", "PLACE", "APPLE", "GROSS", "HUGE", "REAMS"]
+const wordBank = ["BLAME", "LOVES", "SOLVE", "CAULK", "PLACE", "APPLE", "GROSS", "SHOOT", "REAMS"]
 
 // chooses a random word from the word bank
 const dailyWord = wordBank[Math.floor(Math.random()* wordBank.length)]
@@ -21,13 +21,13 @@ passport.authenticate("jwt", {session: false}),
         if(!isValid){
             return res.status(400).json(errors)
         }
-        //splits the generated word//
+        //splits the generated word
         let dailyWordSplit = dailyWord.split("")
 
         //splits the input response
         let split = req.body.guess.toUpperCase().split("")
         
-        // setup letters hash//
+        // setup letters hash
         let lettersHash = {};
         dailyWordSplit.forEach(letter => lettersHash[letter] = 0);
         dailyWordSplit.forEach(letter => lettersHash[letter] +=1);

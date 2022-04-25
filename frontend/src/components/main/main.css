@@ -1,0 +1,31 @@
+.main-page{
+    background-color: #121213;
+    height: 100vh;
+    width: 100vw;
+}
+
+.main-title{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.main-buttons{
+    background: none;
+    color: #ffffff;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    font-weight: 700;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 16px;
+    
+}
+
+.main-buttons:hover{
+    cursor: pointer;
+    color: black;
+    background-color: grey;
+}

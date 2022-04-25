@@ -1,0 +1,37 @@
+.login-page{
+    background-color: #121213;
+    height: 100vh;
+}
+
+.links{
+    text-decoration: none;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.links:hover{
+    cursor: pointer;
+    color: black;
+    background-color: grey;
+}
+
+.login{
+    background: none;
+    color: #ffffff;
+    border: none;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    font-weight: 700;
+    padding-left: 5px;
+    font-size: 16px;
+
+}
+
+.login:hover{
+    cursor: pointer;
+    color: black;
+    background-color: grey;
+}
