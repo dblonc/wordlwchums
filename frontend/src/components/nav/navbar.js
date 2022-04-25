@@ -17,17 +17,11 @@ class NavBar extends React.Component {
     getLinks() {
         if (this.props.loggedIn) {
             return (
-                <div>
-                    <div>
-                        <Link to={'/main'}>Profile</Link> 
-                    </div>
-                    <div>
-                        <Link to={'/daily'}>Daily</Link>
-                    </div>
-                    <div>
-                        <Link to={'/multiplayer'}>Multiplayer</Link>
-                    </div>
-                    <button onClick={this.logoutUser}>Logout</button>
+                <div className="menu-items">
+                        <Link className="links" to={'/main'}>Profile</Link>
+                        <Link className="links" to={'/daily'}>Daily</Link>
+                        <Link className="links" to={'/multiplayer'}>Multiplayer</Link>
+                    <button className="logout" onClick={this.logoutUser}>Logout</button>
                 </div>
             );
         } else {
@@ -43,12 +37,8 @@ class NavBar extends React.Component {
     render() {
         return (
             <div className="header">
-                <div className="menu-items">
-                    {this.getLinks()}
-                </div>
-                <div className="title">
-                    Wordl
-                </div>
+                {this.getLinks()}
+                <div className="title"> Wordl</div>
             </div>
         );
     }
