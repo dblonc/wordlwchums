@@ -7,15 +7,12 @@ const Word = require('../../models/Word');
 const User = require('../../models/User');
 const validateGuessInput = require('../../validation/guess');
 
-const dailyGame = (req, res) =>{
-    const word = "BLAME";
-    // const guessedWord = "",
 
+const wordBank = ["BLAME", "LOVES", "SOLVE", "CAULK", "PLACE", "APPLE", "GROSS", "HUGE", "REAMS"]
 
-
-}
-const wordBank = ["BLAME", "LOVES", "SOLVE", "CAULK", "PLACE"]
+// chooses a random word from the word bank
 const dailyWord = wordBank[Math.floor(Math.random()* wordBank.length)]
+
 router.post("/",
 passport.authenticate("jwt", {session: false}),
 (req, res)=>{
@@ -24,43 +21,49 @@ passport.authenticate("jwt", {session: false}),
         if(!isValid){
             return res.status(400).json(errors)
         }
-        const dailyWordSplit = dailyWord.split("")
+        //splits the generated word//
+        let dailyWordSplit = dailyWord.split("")
 
+        //splits the input response
         let split = req.body.guess.toUpperCase().split("")
+        
+        // setup letters hash//
+        let lettersHash = {};
+        dailyWordSplit.forEach(letter => lettersHash[letter] = 0);
+        dailyWordSplit.forEach(letter => lettersHash[letter] +=1);
+
+        // sets default colors to grey. if there are no letter matches, the ele 
+        // of this array does not change
         let guessedLetters = ["grey","grey","grey","grey","grey"]
+        
+        // does a first pass to see if there are any matching indexes
+        // if there is, the colors array gets updated to pass up the green hex
+        // and the letter is decrimented from the letters hash
+
         for (let i = 0; i < split.length; i++) {
             let ele = split[i];
-            if(ele === dailyWordSplit[i]){
+            if(ele === dailyWordSplit[i] && lettersHash[ele] !== 0){
                 guessedLetters[i] = "#538d4e";
-                dailyWordSplit[i] = " ";
+                lettersHash[ele] -= 1;
             }
-            // if(dailyWordSplit.includes(ele)){
-            //     if(ele === dailyWordSplit[i]){
-            //         guessedLetters[i] = "#538d4e"
-            //     }else{
-            //         guessedLetters[i] = "#b59f3b"
-            //     }
-            // }else{
-            //     guessedLetters[i]="grey"
-            // }
-            
+      
         }
+
+        // after that first pass, loop again to find letters that are in the word
+        // but only if there is still a letter to find in the letters hash
+
         for (let i = 0; i < split.length; i++){
             let ele = split[i];
-            if (guessedLetters[i] !== "#538d4e" && dailyWordSplit.includes(ele)){
+            if (guessedLetters[i] !== "#538d4e" && dailyWordSplit.includes(ele) && lettersHash[ele] !== 0){
                 guessedLetters[i] = "#b59f3b"
-                dailyWordSplit[i] = " ";
+                lettersHash[ele] -= 1;
 
             }
+     
         }
+        
         res.json(guessedLetters)
-        // if(req.body.guess.split("") === dailyWordSplit){
-        //     res.json(true)
-        //     console.log("true")
-        // }else{
-        //     res.json(false)
-        // }
-        // return true
+     
         
     }
 )

@@ -67,12 +67,12 @@ class DailyPage extends React.Component{
 
     handleGuesses(){
         
-        if(this.state.guessNumber < 6){
+        if(this.state.guessNumber < 6 && this.state.isCorrect!==true){
             return(
             <form onSubmit={this.handleSubmit}>
                     <input value={this.state.guessedWord} disabled={(this.state.isDisabled) ? "disabled" : ""} onChange={this.handleChange} type="text" ></input> <button disabled={(this.state.isDisabled) ? "disabled" : ""} type="submit" >Submit</button>
             </form>)
-        }else{
+        }else if(this.state.guessNumber >= 6 &&  this.state.isCorrect !== true){
             return(
                 <h1>YOU LOSE!!</h1>
             )
