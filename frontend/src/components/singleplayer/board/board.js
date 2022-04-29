@@ -10,13 +10,14 @@ class Board extends React.Component {
     // checks the prop to see the guess number, then prints
     // the extra tiles the diff of 6 and the guess num times
     printBoard(){
-        let times = 6 - this.props.guessNumber;
+        let times = 5 - this.props.guessNumber;
 
-        if(times === 0){
+        if(times <= 0){
             return null
         }else{
 
-        return( [...Array(times -1)].map((e, i) => <div className="cur-guess" key={i} id="guess-word2">
+        return( [...Array(times)].map((e, i) => 
+        <div className="cur-guess" key={i} id="guess-word2">
             <div className="guess-tile">  </div>
             <div className="guess-tile">  </div>
             <div className="guess-tile">  </div>

@@ -10,7 +10,6 @@ class DailyPage extends React.Component{
         
         this.state = {
             guessedWord: "",
-            currentGuess: [],
             usedWords: [],
             isCorrect: false,
             guessNumber: 0,
@@ -28,7 +27,8 @@ class DailyPage extends React.Component{
         this.letterBackground = this.letterBackground.bind(this)
     }
 
-// Different Handlers for different events
+// Handles letter input and checks to see if what is typed is in the alphabet string.
+// it then updates the state to show that set of guessed letters 
 
     handleChange(e){
         const alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -40,6 +40,10 @@ class DailyPage extends React.Component{
         }
     }
 
+// This sends the word to the backend, saves the word to an array to be displayed
+// on the board, and also receives the colors array from the backend to update the 
+// background colors of the used words. It increments the guessNumber count and resets
+// the guessed word back to an empty string
     handleSubmit(e){
         
         e.preventDefault();
@@ -54,9 +58,7 @@ class DailyPage extends React.Component{
                 splitWord: this.state.guessedWord.toUpperCase().split(""),
                 guessedWord: "",
                 usedWords: newUsedWords,
-                savedColors: newSavedColors,
-                currentGuess: []
-                
+                savedColors: newSavedColors,                
             })
 
 
@@ -65,12 +67,18 @@ class DailyPage extends React.Component{
         )
     }
 
+//  This changes the input box when it checks to see what numbered guess you are on and if you
+//  have already guessed the word. Its functionality will be disabled if these conditions are met
+//  Equally, if your guess count is over 6 and the word is not correct, then the loss message appears
+
     handleGuesses(){
         
         if(this.state.guessNumber < 6 && this.state.isCorrect!==true){
             return(
             <form onSubmit={this.handleSubmit}>
-                    <input value={this.state.guessedWord} disabled={(this.state.isDisabled) ? "disabled" : ""} onChange={this.handleChange} type="text" ></input> <button disabled={(this.state.isDisabled) ? "disabled" : ""} type="submit" >Submit</button>
+                    <input value={this.state.guessedWord} disabled={(this.state.isDisabled) ? "disabled" : ""} 
+                    onChange={this.handleChange} type="text" ></input> 
+                    <button disabled={(this.state.isDisabled) ? "disabled" : ""} type="submit" >Submit</button>
             </form>)
         }else if(this.state.guessNumber >= 6 &&  this.state.isCorrect !== true){
             return(
